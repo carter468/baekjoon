@@ -2398,7 +2398,3 @@
 #     for i in range(3,n):
 #         dp[i] = max(dp[i-2]+score_floor[i],dp[i-3]+score_floor[i-1]+score_floor[i])
 #     print(dp[n-1])
-
-#1463번 1로 만들기
-
-n = 10

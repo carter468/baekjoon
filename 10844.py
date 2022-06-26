@@ -19,17 +19,17 @@
 
 # 끝자리의 개수를 이용하여 점화식을 세우기
 # j = 0 : dp[i][j] = dp[i-1][1] , j = 9 : dp[i][j] = dp[i-1][8]
-            # j = 1~8 : dp[i][j] = dp[i-1][j-1]+dp[i-1][j+1] 
-# n = int(input())
-# dp = [[0 for _ in range(10)] for _ in range(n)] # 끝자리수의 개수를 저장할 리스트
-# dp[0] = [0,1,1,1,1,1,1,1,1,1]   # 1자리 계단수의 끝자리수 개수
-# for i in range(1,n):
-#     for j in range(10):
-#         if j == 0:
-#             dp[i][j] = dp[i-1][1]
-#         elif j == 9:
-#             dp[i][j] = dp[i-1][8]
-#         else:
-#             dp[i][j] = (dp[i-1][j-1]+dp[i-1][j+1]) % 1000000000
+#             j = 1~8 : dp[i][j] = dp[i-1][j-1]+dp[i-1][j+1] 
+n = int(input())
+dp = [[0 for _ in range(10)] for _ in range(n)] # 끝자리수의 개수를 저장할 리스트
+dp[0] = [0,1,1,1,1,1,1,1,1,1]   # 1자리 계단수의 끝자리수 개수
+for i in range(1,n):
+    for j in range(10):
+        if j == 0:
+            dp[i][j] = dp[i-1][1]
+        elif j == 9:
+            dp[i][j] = dp[i-1][8]
+        else:
+            dp[i][j] = (dp[i-1][j-1]+dp[i-1][j+1]) % 1000000000
 
-# print(sum(dp[n-1])%1000000000)
+print(sum(dp[n-1])%1000000000)
