@@ -32,7 +32,7 @@ def dijkstra(start):
             if x < distance[i[0]]:
                 distance[i[0]] = x
                 heapq.heappush(q,(x,i[0]))
-
+        
 dijkstra(k)
 
 for i in range(1,v+1):
