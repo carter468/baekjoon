@@ -11,6 +11,7 @@ for _ in range(e):
     a,b,c = map(int,input().split())
     graph[a-1][b-1] = c
 
+# 플로이드 와샬 알고리즘
 for k in range(v):  # 거쳐가는 정점
     for i in range(v):  
         for j in range(v):
