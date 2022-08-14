@@ -1,13 +1,15 @@
 # 트리
 
+from collections import deque
 import sys
 input = sys.stdin.readline
 
 def bfs(x):
     result = True
-    q = [x]
+    q = deque()
+    q.append(x)
     while q:
-        k = q.pop(0)
+        k = q.popleft()
         if visited[k] == 1:
             result = False
         visited[k] = 1
@@ -35,7 +37,7 @@ while True:
         if bfs(i) == True:
             cnt += 1
     if cnt == 0:
-        print('Case {}: No Trees.'.format(case))
+        print('Case {}: No trees.'.format(case))
     elif cnt == 1:
         print('Case {}: There is one tree.'.format(case))
     else:
