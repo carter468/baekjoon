@@ -1,7 +1,5 @@
 # 경찰차
 
-from cgi import print_arguments
-
 
 n = int(input())
 w = int(input())
