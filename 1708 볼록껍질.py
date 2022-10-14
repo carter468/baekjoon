@@ -9,4 +9,4 @@ coordinate = []
 for _ in range(n):
     coordinate.append(list(map(int,input().split())))
 coordinate.sort(key=lambda x:(x[0],x[1]))
-answer += convexhull()
+
