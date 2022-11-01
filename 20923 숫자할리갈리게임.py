@@ -12,16 +12,15 @@ for _ in range(number_card):
     deck_do.append(a)
     deck_su.append(b)
 
-# 게임 종료 판별
-def checkEnd(n,m):
-    if n==m:
-        if len(deck_do) == len(deck_su):
-            print('dosu')
-        elif len(deck_do) > len(deck_su):
-            print('do')
-        else:
-            print('su')
-        quit()
+# 게임 종료
+def gameOver():
+    if len(deck_do) == len(deck_su):
+        print('dosu')
+    elif len(deck_do) > len(deck_su):
+        print('do')
+    else:
+        print('su')
+    quit()
 
 # 게임 스타트
 deck_ground_do,deck_ground_su = deque(),deque()
@@ -42,7 +41,8 @@ while True:
         deck_ground_do.clear()
         deck_ground_su.clear()
     count_game += 1
-    checkEnd(count_game,number_game)
+    if count_game == number_game:
+        gameOver()
     
     deck_ground_su.append(deck_su.pop())
     if not deck_su:
@@ -59,4 +59,5 @@ while True:
         deck_ground_do.clear()
         deck_ground_su.clear()
     count_game += 1
-    checkEnd(count_game,number_game)
+    if count_game == number_game:
+        gameOver()
