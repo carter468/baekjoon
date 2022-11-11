@@ -1,4 +1,5 @@
 # 디스크 트리
+# Gold 2, Trie
 
 import sys
 input = sys.stdin.readline
