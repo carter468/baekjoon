@@ -1,19 +1,20 @@
 # 그램팬
 # Silver 1, 문자열
 
+import sys
+
 idx = 65
-na,nz = 0,0
+na = 0
 result = 0
-for char in input():
+for char in sys.stdin.readline():
     if ord(char) == idx or ord(char) == idx+1:
         idx = ord(char)
         if char == 'Z':
-            nz += 1
+            result += na
     else:
-        result += na*nz
         idx = 65
-        na,nz = 0,0
+        na = 0
     if char == 'A':
         na += 1
 
-print(result+na*nz)
+print(result)
