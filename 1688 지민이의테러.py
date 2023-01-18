@@ -1,5 +1,6 @@
 # 지민이의 테러
 # Platinum 5, 선분교차판정, 다각형 내부의 점 판정
+
 import sys
 input = sys.stdin.readline
 
