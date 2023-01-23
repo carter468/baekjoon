@@ -3,13 +3,10 @@
 
 import sys
 
-while True:
-    s = sys.stdin.readline().strip()
-    if s=='0':
-        break
+while (s:=sys.stdin.readline().strip())!='0':
     N,a,b = map(int,s.split())
     order = {}
-    x,cnt=0,0
+    x=cnt=0
     while x not in order:
         order[x] = cnt
         cnt += 1
