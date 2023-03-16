@@ -12,13 +12,9 @@ def m_mul(a,b):
     return c
 
 def m_pow(a,n):
-    if n==0: return [[1,1,1]]
     if n==1: return a
     if n%2: return m_mul((m_pow(a,n-1)),a)
     return m_pow(m_mul(a,a),n//2)
 
 MOD = 10**9+7
-answer = 0
-for x in m_pow([[1,1,1],[1,0,1],[1,1,0]],int(input())-1):
-    answer += sum(x)
-print(answer%MOD)
+print(sum(m_pow([[1,1,1],[1,0,1],[1,1,0]],int(input()))[0])%MOD)
