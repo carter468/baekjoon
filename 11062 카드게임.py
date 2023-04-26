@@ -25,4 +25,4 @@ for _ in range(int(input())):
     cards = list(map(int,input().split()))
     dp = [[0 for _ in range(n)] for _ in range(n)]
     game(0,0,n-1)
-    print(dp[0][n-1])
+    print(dp[0][n-1]) 
