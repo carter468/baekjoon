@@ -1,5 +1,5 @@
 # 가희의 고구마 먹방
-# Gold 5, 브루트포스
+# Gold 5, 브루트포스 
 
 import sys
 input = sys.stdin.readline
