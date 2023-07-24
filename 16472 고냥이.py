@@ -1,5 +1,5 @@
 # 고냥이
-# Gold 4, two_pointer
+# Gold 4, two pointer
 
 from collections import defaultdict
 
