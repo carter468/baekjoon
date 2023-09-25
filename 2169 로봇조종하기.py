@@ -1,33 +1,19 @@
 # 로봇 조종하기
-
-import sys
-input = sys.stdin.readline
+# Gold 2, DP
 
 n,m = map(int,input().split())
-value = []
-for _ in range(n):
-    value.append(tuple(map(int,input().split())))
-dp = [[-10**6 for _ in range(m)] for _ in range(n)]
-dp[0][0] = value[0][0]
-visit = [[[] for _ in range(m)] for _ in range(n)]
-visit[0][0] = [[0,0]]
-dx = [-1,1,0]
-dy = [0,0,1]
-for i in range(n):
-    for j in range(m):
-        for k in range(3):
-            x = i+dx[k]
-            y = j+dy[k]
-            if x<0 or x>n-1 or y<0 or y>m-1 or [x,y] in visit[i][j]:
-                continue
-            tmp = dp[i][j] + value[x][y]
-            if tmp > dp[x][y]:
-                dp[x][y] = tmp
-                visit[x][y] = visit[i][j]+[[x,y]]
-print(dp[n-1][m-1])
+dp = [list(map(int,input().split())) for _ in range(n)]
 
-# 10   25    7  8   13
-# 68   24  -78  63  32
-# 12  -69  100 -29 -25
-# -16 -22  -57 -33  99
-# 7   -76  -11  77  15
+for j in range(1,m):
+    dp[0][j] += dp[0][j-1]
+for i in range(1,n):
+    left = [dp[i][j]+dp[i-1][j] for j in range(m)]
+    right = [dp[i][j]+dp[i-1][j] for j in range(m)]
+    for j in range(1,m):
+        left[j] = max(left[j],left[j-1]+dp[i][j])
+    for j in range(m-2,-1,-1):
+        right[j] = max(right[j],right[j+1]+dp[i][j])
+    for j in range(m):
+        dp[i][j] = max(left[j],right[j])
+        
+print(dp[-1][-1])
