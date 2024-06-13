@@ -1,5 +1,5 @@
 # Bad Horse (Small1)
-# Gold 4, DFS, bipartite graph, hash_set
+# Gold 4, DFS, bipartite graph, hash set
 
 from collections import defaultdict
 
