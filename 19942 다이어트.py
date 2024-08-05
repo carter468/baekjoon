@@ -1,6 +1,6 @@
 # 다이어트
 # Gold 4, bruteforcing
-
+ 
 n = int(input())
 m = tuple(map(int,input().split()))
 arr = [tuple(map(int,input().split())) for _ in range(n)]
