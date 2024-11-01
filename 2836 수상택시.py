@@ -1,36 +1,21 @@
 # 수상 택시
+# Gold 3, sweeping
 
 import sys
 input = sys.stdin.readline
 
 n,m = map(int,input().split())
-back = []
+arr = []
 for _ in range(n):
-    ride,dest = map(int,input().split())
-    if dest < ride:
-        back.append((dest,ride))
-back.sort()
-# start,end = back[0]
-# ans = end-start
-# for left,right in back:
-#     if right <= end:    
-#         continue
-#     elif left < end < right:   
-#         ans += right - end
-#         end = right
-#     else:   
-#         ans += right-left
-#         start,end = left,right
-# print(m+ans*2)
+    a,b = map(int,input().split())
+    if a > b: arr.append((b,a))
 
-start,end = back[0]
-ans = 0
-for left,right in back:
-    if end > left:              # 겹치는 경우
-        end = max(end,right)
-    else:                       # 겹치지않는 경우
-        ans += end - start
-        start,end = left,right
-ans += end - start
-print(m+ans*2)
-
+result = m
+l,r = 0,0
+for a,b in sorted(arr):
+    if a > r:
+        result += (r-l)*2
+        l,r = a,b
+    else:
+        r = max(r,b)
+print(result+(r-l)*2)
