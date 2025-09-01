@@ -1,46 +1,73 @@
 # 북서풍
+# Platinum 3, segtree, sweeping, coordinate compression
 
 import sys
 input = sys.stdin.readline
 
-def coor_comp():  # 좌표압축
-    island.sort(key = lambda x:x[1])
-    rank = -1
-    prev = 10**10
-    for i in range(n):
-        if island[i][1] != prev:
-            rank += 1
-        prev = island[i][1]
-        island[i][1] = rank
-    island.sort(key = lambda x:[x[0],-x[1]])
-def update(node,left,right,idx):
-    if left == right:
-        tree[node] += 1
-        return
-    mid = (left+right)//2
-    if idx<=mid:
-        update(node*2,left,mid,idx)
-    else:
-        update(node*2+1,mid+1,right,idx)
-    tree[node] = tree[node*2]+tree[node*2+1]
-def query(node,left,right,start,end):
-    if right<start or left>end:
-        return 0
-    if left<=start and right>=end:
-        return tree[node]
-    mid = (start+end)//2
-    return query(node*2,left,right,start,mid)+query(node*2+1,left,right,mid+1,end)
+def update(start,end,node,idx):
+    if idx < start or end < idx: return
+    tree[node] += 1
+    if start == end: return
+    mid = (start+end)>>1
+    update(start,mid,node*2,idx)
+    update(mid+1,end,node*2+1,idx)
 
-t = int(input())
-for _ in range(t):
-    island = []
-    n = int(input())
-    for _ in range(n):
-        island.append(list(map(int,input().split())))
-    coor_comp()
-    tree = [0]*n*4
-    ans = 0
+def answer(start,end,node,left,right):
+    if end < left or right < start: return 0
+    if left <= start and end <= right: return tree[node]
+    mid = (start+end)>>1
+    return answer(start,mid,node*2,left,right)+answer(mid+1,end,node*2+1,left,right)
+
+for _ in range(int(input())):
+    arr = sorted([tuple(map(int,input().split())) for _ in range(int(input()))],key=lambda x:(-x[1],x[0]))
+    
+    arr_x = []
+    for x,y in arr:
+        arr_x.append(x)
+    arr_x = sorted(set(arr_x))
+    dic = {}
+    n = len(arr_x)
     for i in range(n):
-        ans += query(1,island[i][1],n-1,0,n-1)
-        update(1,0,n-1,island[i][1])
-    print(ans)
+        dic[arr_x[i]] = i
+
+    tree = [0]*(n*4)
+    count = 0
+    for x,y in arr:
+        count += answer(0,n-1,1,0,dic[x])
+        update(0,n-1,1,dic[x])
+
+    print(count)
+
+import sys
+input = sys.stdin.readline
+
+def update(i):
+    while i <= n:
+        tree[i] += 1
+        i += (i&-i)
+
+def answer(i):
+    result = 0
+    while i > 0:
+        result += tree[i]
+        i -= (i&-i)
+    return result
+
+for _ in range(int(input())):
+    arr = sorted([tuple(map(int,input().split())) for _ in range(int(input()))],key=lambda x:(-x[1],x[0]))
+
+    arr_x = []
+    for x,y in arr:
+        arr_x.append(x)
+    arr_x = sorted(set(arr_x))
+    dic = {}
+    n = len(arr_x)
+    for i in range(n):
+        dic[arr_x[i]] = i+1
+
+    tree = [0]*(n+1)
+    count = 0
+    for x,y in arr:
+        count += answer(dic[x])
+        update(dic[x])
+    print(count)
